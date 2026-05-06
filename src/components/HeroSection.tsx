@@ -80,7 +80,7 @@ export function HeroSection() {
 
       <motion.div className="relative z-10" style={{ x: coupleX, y: coupleY }}>
         <motion.img
-          src="/couple-photo.png"
+          src="/uploads/image_48fa3c3b-a0fe-4caf-9d59-adc3b4fe3aea.png"
           alt="Kasun & Dilki"
           className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain drop-shadow-2xl"
           width={800}
