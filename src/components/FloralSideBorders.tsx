@@ -39,7 +39,12 @@ export function FloralSideBorders() {
           height={1920}
           loading="lazy"
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
         />
       </motion.div>
     </>

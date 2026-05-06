@@ -9,13 +9,19 @@ const details = [
     sub: "Saturday Evening",
   },
   {
-    icon: "📍",
-    title: "The Venue",
-    info: "Asliya",
-    sub: "An exquisite celebration awaits",
+    icon: "🕘",
+    title: "The Time",
+    info: "9:30 AM Onwards",
+    sub: "Join us for a day of celebration",
   },
   {
-    icon: "🕕",
+    icon: "📍",
+    title: "The Venue",
+    info: "Asliya Golden Cassandra",
+    sub: "Lotus Ballroom",
+  },
+  {
+    icon: "🎉",
     title: "The Celebration",
     info: "Homecoming Reception",
     sub: "An evening of joy & togetherness",
@@ -29,7 +35,8 @@ export function EventDetails() {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(180deg, transparent 0%, oklch(0.4 0.08 160 / 4%) 50%, transparent 100%)",
+          background:
+            "linear-gradient(180deg, transparent 0%, oklch(0.4 0.08 160 / 4%) 50%, transparent 100%)",
         }}
       />
 
@@ -47,9 +54,15 @@ export function EventDetails() {
           Celebration Details
         </h2>
         <div className="flex items-center justify-center gap-3 mb-14">
-          <span className="h-px w-16" style={{ background: "var(--color-gold)" }} />
+          <span
+            className="h-px w-16"
+            style={{ background: "var(--color-gold)" }}
+          />
           <span className="text-gold-gradient font-display text-xl">✦</span>
-          <span className="h-px w-16" style={{ background: "var(--color-gold)" }} />
+          <span
+            className="h-px w-16"
+            style={{ background: "var(--color-gold)" }}
+          />
         </div>
 
         {/* Timeline cards */}
@@ -71,7 +84,8 @@ export function EventDetails() {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
-                  background: "radial-gradient(circle at 50% 50%, oklch(0.75 0.12 85 / 8%), transparent 70%)",
+                  background:
+                    "radial-gradient(circle at 50% 50%, oklch(0.75 0.12 85 / 8%), transparent 70%)",
                 }}
               />
               <span className="text-4xl mb-3 block">{d.icon}</span>
@@ -87,7 +101,10 @@ export function EventDetails() {
               >
                 {d.info}
               </p>
-              <p className="font-body text-sm mt-1" style={{ color: "var(--color-muted-foreground)" }}>
+              <p
+                className="font-body text-sm mt-1"
+                style={{ color: "var(--color-muted-foreground)" }}
+              >
                 {d.sub}
               </p>
             </motion.div>
@@ -103,7 +120,7 @@ export function EventDetails() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <a
-            href="https://www.google.com/maps/search/Asliya"
+            href="https://maps.app.goo.gl/9tWzNCBT8GGD4ABe9"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -134,7 +151,14 @@ export function EventDetails() {
           whileInView={{ opacity: 0.5 }}
           viewport={{ once: true }}
         >
-          <img src={floralImg} alt="" className="w-full" width={1200} height={512} loading="lazy" />
+          <img
+            src={floralImg}
+            alt=""
+            className="w-full"
+            width={1200}
+            height={512}
+            loading="lazy"
+          />
         </motion.div>
       </motion.div>
     </section>

@@ -20,21 +20,25 @@ export function EnvelopeOpening({ onOpen, isOpen }: EnvelopeOpeningProps) {
     <AnimatePresence>
       {!isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer overflow-hidden"
+          className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer overflow-hidden bg-black/5"
           onClick={onOpen}
           exit={{ opacity: 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
-          {/* Full-screen envelope image */}
+          {/* Full-screen envelope image - mobile responsive */}
           <motion.img
             src={envelopeImg}
             alt="Open Invitation"
-            className="w-full h-full object-cover absolute inset-0"
+            className="w-full h-full object-cover object-center sm:object-contain absolute inset-0"
             width={1920}
             height={1080}
             initial={{ scale: 1.08, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5 }}
+            style={{
+              maxHeight: "100vh",
+              maxWidth: "100vw",
+            }}
           />
 
           {/* Falling flower petals */}
@@ -55,7 +59,11 @@ export function EnvelopeOpening({ onOpen, isOpen }: EnvelopeOpeningProps) {
                 }}
                 animate={{
                   y: ["0vh", "110vh"],
-                  x: [0, (Math.random() - 0.5) * 120, (Math.random() - 0.5) * 80],
+                  x: [
+                    0,
+                    (Math.random() - 0.5) * 120,
+                    (Math.random() - 0.5) * 80,
+                  ],
                   rotate: [0, 180 + Math.random() * 360],
                   opacity: [0, 0.7, 0.6, 0],
                 }}
@@ -82,23 +90,33 @@ export function EnvelopeOpening({ onOpen, isOpen }: EnvelopeOpeningProps) {
                 top: `${15 + Math.random() * 70}%`,
               }}
               animate={{ opacity: [0, 1, 0], scale: [0, 1.8, 0] }}
-              transition={{ duration: 1.5 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 4 }}
+              transition={{
+                duration: 1.5 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 4,
+              }}
             />
           ))}
 
           {/* Tap to open overlay */}
-          <motion.div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 text-center z-10">
+          <motion.div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 text-center z-10 px-4">
             <motion.p
-              className="font-display text-xl sm:text-2xl tracking-[0.25em] uppercase"
-              style={{ color: "oklch(0.95 0.02 85)", textShadow: "0 2px 15px oklch(0 0 0 / 60%)" }}
+              className="font-display text-lg sm:text-xl md:text-2xl tracking-[0.15em] sm:tracking-[0.25em] uppercase"
+              style={{
+                color: "oklch(0.95 0.02 85)",
+                textShadow: "0 2px 15px oklch(0 0 0 / 60%)",
+              }}
               animate={{ opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 2.5, repeat: Infinity }}
             >
               Open Invitation
             </motion.p>
             <motion.p
-              className="font-serif text-sm mt-1 italic"
-              style={{ color: "oklch(0.85 0.08 85 / 80%)", textShadow: "0 1px 8px oklch(0 0 0 / 50%)" }}
+              className="font-serif text-xs sm:text-sm mt-1 italic"
+              style={{
+                color: "oklch(0.85 0.08 85 / 80%)",
+                textShadow: "0 1px 8px oklch(0 0 0 / 50%)",
+              }}
             >
               tap to reveal
             </motion.p>

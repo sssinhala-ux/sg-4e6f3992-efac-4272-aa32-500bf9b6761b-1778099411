@@ -7,7 +7,8 @@ export function ThankYouSection() {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(180deg, transparent, oklch(0.4 0.08 160 / 6%) 50%, oklch(0.35 0.15 20 / 4%) 100%)",
+          background:
+            "linear-gradient(180deg, transparent, oklch(0.4 0.08 160 / 6%) 50%, oklch(0.35 0.15 20 / 4%) 100%)",
         }}
       />
 
@@ -25,7 +26,15 @@ export function ThankYouSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <img src={floralImg} alt="" className="w-full" width={1200} height={512} loading="lazy" style={{ transform: "scaleY(-1)" }} />
+          <img
+            src={floralImg}
+            alt=""
+            className="w-full"
+            width={1200}
+            height={512}
+            loading="lazy"
+            style={{ transform: "scaleY(-1)" }}
+          />
         </motion.div>
 
         <motion.h2
@@ -58,7 +67,8 @@ export function ThankYouSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.7, duration: 0.8 }}
         >
-          Thank you for being a part of our journey. Your presence will make our celebration truly unforgettable.
+          Thank you for being a part of our journey. Your presence will make our
+          celebration truly unforgettable.
         </motion.p>
 
         <motion.div
@@ -68,9 +78,15 @@ export function ThankYouSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <span className="h-px w-12" style={{ background: "var(--color-gold)" }} />
+          <span
+            className="h-px w-12"
+            style={{ background: "var(--color-gold)" }}
+          />
           <span className="text-gold-gradient font-display text-2xl">❦</span>
-          <span className="h-px w-12" style={{ background: "var(--color-gold)" }} />
+          <span
+            className="h-px w-12"
+            style={{ background: "var(--color-gold)" }}
+          />
         </motion.div>
 
         <motion.p
@@ -91,7 +107,14 @@ export function ThankYouSection() {
           viewport={{ once: true }}
           transition={{ delay: 1.3 }}
         >
-          <img src={floralImg} alt="" className="w-full" width={1200} height={512} loading="lazy" />
+          <img
+            src={floralImg}
+            alt=""
+            className="w-full"
+            width={1200}
+            height={512}
+            loading="lazy"
+          />
         </motion.div>
       </motion.div>
     </section>

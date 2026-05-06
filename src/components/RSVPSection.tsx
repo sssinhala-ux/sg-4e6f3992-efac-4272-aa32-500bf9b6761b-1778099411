@@ -3,11 +3,49 @@ import { useState } from "react";
 
 export function RSVPSection() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", guests: "1", attending: "yes", message: "" });
+  const [submittedName, setSubmittedName] = useState("");
+  const [submittedAttending, setSubmittedAttending] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    guests: "1",
+    attending: "yes",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    const formData = new FormData();
+    formData.append("access_key", "d150d4cf-e30f-4fd4-be14-a3b7ff8a5497");
+    formData.append("name", form.name);
+    formData.append("guests", form.guests);
+    formData.append(
+      "attending",
+      form.attending === "yes" ? "Joyfully Accepting" : "Regretfully Declining",
+    );
+    formData.append("message", form.message || "No message provided");
+    formData.append(
+      "subject",
+      `RSVP: ${form.name} - ${form.attending === "yes" ? "Attending" : "Not Attending"}`,
+    );
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmittedName(form.name);
+        setSubmittedAttending(form.attending);
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error("RSVP submission error:", error);
+      alert("There was an error submitting your RSVP. Please try again.");
+    }
   };
 
   return (
@@ -15,7 +53,8 @@ export function RSVPSection() {
       <div
         className="absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse at 30% 50%, oklch(0.35 0.15 20 / 5%) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, oklch(0.4 0.08 160 / 5%) 0%, transparent 60%)",
+          background:
+            "radial-gradient(ellipse at 30% 50%, oklch(0.35 0.15 20 / 5%) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, oklch(0.4 0.08 160 / 5%) 0%, transparent 60%)",
         }}
       />
 
@@ -33,7 +72,10 @@ export function RSVPSection() {
           >
             RSVP
           </h2>
-          <p className="mt-2 font-serif text-lg italic" style={{ color: "var(--color-wine)" }}>
+          <p
+            className="mt-2 font-serif text-lg italic"
+            style={{ color: "var(--color-wine)" }}
+          >
             We'd love to celebrate with you
           </p>
         </div>
@@ -51,7 +93,10 @@ export function RSVPSection() {
               transition={{ duration: 0.5 }}
             >
               <div>
-                <label className="block font-body text-sm font-medium mb-2" style={{ color: "var(--color-foreground)" }}>
+                <label
+                  className="block font-body text-sm font-medium mb-2"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Your Name
                 </label>
                 <input
@@ -70,7 +115,10 @@ export function RSVPSection() {
               </div>
 
               <div>
-                <label className="block font-body text-sm font-medium mb-2" style={{ color: "var(--color-foreground)" }}>
+                <label
+                  className="block font-body text-sm font-medium mb-2"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Number of Guests
                 </label>
                 <select
@@ -84,13 +132,18 @@ export function RSVPSection() {
                   }}
                 >
                   {[1, 2, 3, 4, 5].map((n) => (
-                    <option key={n} value={n}>{n} {n === 1 ? "Guest" : "Guests"}</option>
+                    <option key={n} value={n}>
+                      {n} {n === 1 ? "Guest" : "Guests"}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block font-body text-sm font-medium mb-2" style={{ color: "var(--color-foreground)" }}>
+                <label
+                  className="block font-body text-sm font-medium mb-2"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Attendance
                 </label>
                 <div className="flex gap-3">
@@ -101,30 +154,45 @@ export function RSVPSection() {
                       onClick={() => setForm({ ...form, attending: opt })}
                       className="flex-1 py-3 rounded-xl font-body text-sm font-medium transition-all duration-300 cursor-pointer"
                       style={{
-                        background: form.attending === opt
-                          ? opt === "yes" ? "var(--color-emerald)" : "var(--color-wine)"
-                          : "oklch(1 0 0 / 30%)",
-                        color: form.attending === opt ? "var(--color-cream)" : "var(--color-foreground)",
-                        border: `1px solid ${form.attending === opt
-                          ? "transparent"
-                          : "oklch(0.4 0.08 160 / 20%)"}`,
+                        background:
+                          form.attending === opt
+                            ? opt === "yes"
+                              ? "var(--color-emerald)"
+                              : "var(--color-wine)"
+                            : "oklch(1 0 0 / 30%)",
+                        color:
+                          form.attending === opt
+                            ? "var(--color-cream)"
+                            : "var(--color-foreground)",
+                        border: `1px solid ${
+                          form.attending === opt
+                            ? "transparent"
+                            : "oklch(0.4 0.08 160 / 20%)"
+                        }`,
                       }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      {opt === "yes" ? "🎉 Joyfully Accept" : "😢 Regretfully Decline"}
+                      {opt === "yes"
+                        ? "🎉 Joyfully Accept"
+                        : "😢 Regretfully Decline"}
                     </motion.button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block font-body text-sm font-medium mb-2" style={{ color: "var(--color-foreground)" }}>
+                <label
+                  className="block font-body text-sm font-medium mb-2"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Message (Optional)
                 </label>
                 <textarea
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
                   rows={3}
                   className="w-full px-4 py-3 rounded-xl font-body text-sm outline-none resize-none transition-all duration-300 focus:ring-2"
                   style={{
@@ -140,7 +208,8 @@ export function RSVPSection() {
                 type="submit"
                 className="w-full py-3.5 rounded-xl font-body text-sm font-semibold tracking-wide uppercase cursor-pointer"
                 style={{
-                  background: "linear-gradient(135deg, var(--color-emerald), var(--color-emerald-light))",
+                  background:
+                    "linear-gradient(135deg, var(--color-emerald), var(--color-emerald-light))",
                   color: "var(--color-cream)",
                   boxShadow: "0 8px 25px oklch(0.4 0.08 160 / 25%)",
                 }}
@@ -169,11 +238,12 @@ export function RSVPSection() {
                   style={{
                     width: Math.random() * 8 + 3,
                     height: Math.random() * 8 + 3,
-                    background: i % 3 === 0
-                      ? "oklch(0.75 0.12 85 / 50%)"
-                      : i % 3 === 1
-                        ? "oklch(0.4 0.08 160 / 40%)"
-                        : "oklch(0.35 0.15 20 / 35%)",
+                    background:
+                      i % 3 === 0
+                        ? "oklch(0.75 0.12 85 / 50%)"
+                        : i % 3 === 1
+                          ? "oklch(0.4 0.08 160 / 40%)"
+                          : "oklch(0.35 0.15 20 / 35%)",
                     left: `${Math.random() * 100}%`,
                     bottom: "0%",
                   }}
@@ -200,10 +270,13 @@ export function RSVPSection() {
                 className="font-display text-2xl sm:text-3xl font-semibold"
                 style={{ color: "var(--color-emerald)" }}
               >
-                Thank You, {form.name}!
+                Thank You, {submittedName}!
               </h3>
-              <p className="mt-3 font-serif text-lg" style={{ color: "var(--color-wine)" }}>
-                {form.attending === "yes"
+              <p
+                className="mt-3 font-serif text-lg"
+                style={{ color: "var(--color-wine)" }}
+              >
+                {submittedAttending === "yes"
                   ? "We can't wait to celebrate with you!"
                   : "You'll be missed. Thank you for letting us know."}
               </p>

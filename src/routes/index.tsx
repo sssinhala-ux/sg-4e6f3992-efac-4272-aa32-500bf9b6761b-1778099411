@@ -15,9 +15,20 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Kasun & Dilki — Homecoming Celebration" },
-      { name: "description", content: "Join Kasun & Dilki for their homecoming celebration on June 7th, 2026. A luxurious evening of love, joy, and togetherness." },
-      { property: "og:title", content: "Kasun & Dilki — Homecoming Celebration" },
-      { property: "og:description", content: "Join us for an unforgettable evening of celebration — June 7th, 2026" },
+      {
+        name: "description",
+        content:
+          "Join Kasun & Dilki for their homecoming celebration on June 7th, 2026. A luxurious evening of love, joy, and togetherness.",
+      },
+      {
+        property: "og:title",
+        content: "Kasun & Dilki — Homecoming Celebration",
+      },
+      {
+        property: "og:description",
+        content:
+          "Join us for an unforgettable evening of celebration — June 7th, 2026",
+      },
     ],
   }),
 });
@@ -28,7 +39,10 @@ function Index() {
   return (
     <>
       <FlowerRain />
-      <EnvelopeOpening isOpen={envelopeOpened} onOpen={() => setEnvelopeOpened(true)} />
+      <EnvelopeOpening
+        isOpen={envelopeOpened}
+        onOpen={() => setEnvelopeOpened(true)}
+      />
 
       <AnimatePresence>
         {envelopeOpened && (

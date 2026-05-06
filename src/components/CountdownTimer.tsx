@@ -18,7 +18,10 @@ function CountdownCard({ value, label }: { value: number; label: string }) {
   return (
     <motion.div
       className="glass glow-emerald rounded-2xl px-4 py-5 sm:px-6 sm:py-7 flex flex-col items-center min-w-[80px] sm:min-w-[100px]"
-      whileHover={{ scale: 1.05, boxShadow: "0 0 40px oklch(0.75 0.12 85 / 30%)" }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0 0 40px oklch(0.75 0.12 85 / 30%)",
+      }}
       transition={{ type: "spring", stiffness: 300 }}
     >
       <motion.span
@@ -54,7 +57,8 @@ export function CountdownTimer() {
       <div
         className="absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse at 50% 50%, oklch(0.4 0.08 160 / 8%) 0%, transparent 70%)",
+          background:
+            "radial-gradient(ellipse at 50% 50%, oklch(0.4 0.08 160 / 8%) 0%, transparent 70%)",
         }}
       />
       <motion.div
