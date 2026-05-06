@@ -17,7 +17,6 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
   }
 });
 
-export const startInstance = createStart({
-  createRouter: getRouter,
+export const startInstance = createStart(() => ({
   requestMiddleware: [errorMiddleware],
-});
+}));
